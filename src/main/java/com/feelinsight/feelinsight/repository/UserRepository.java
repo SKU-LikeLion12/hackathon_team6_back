@@ -26,10 +26,10 @@ public class UserRepository implements UserRepositoryIN{
     }
 
     @Override
-    public User findById(String Id) {
+    public User findById(String id) {
         try{
-            return em.createQuery("select u from User u where u.Id=:Id",User.class)
-                    .setParameter("Id",Id).getSingleResult();
+            return em.createQuery("select u from User u where u.id=:id",User.class)
+                    .setParameter("id",id).getSingleResult();
         }catch(NoResultException e){
             return null;
         }
