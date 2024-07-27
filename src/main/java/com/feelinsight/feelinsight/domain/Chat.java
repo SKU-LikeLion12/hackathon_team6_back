@@ -3,11 +3,12 @@ package com.feelinsight.feelinsight.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
-@Getter
+@Getter@Setter
 @Entity
 //챗봇 대화 데이터
 public class Chat {

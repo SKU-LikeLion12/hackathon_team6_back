@@ -2,6 +2,7 @@ package com.feelinsight.feelinsight.controller;
 
 import com.feelinsight.feelinsight.DTO.UserDTO.*;
 import com.feelinsight.feelinsight.domain.User;
+import com.feelinsight.feelinsight.service.JwtUtility;
 import com.feelinsight.feelinsight.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final JwtUtility jwtUtility;
 
     @Operation(summary="회원가입", description = "정보를 입력하고 회원가입 시도", tags = {"user"},
         responses = {@ApiResponse(responseCode = "201", description = "생성 성공 후 토큰 변환"),
@@ -45,8 +47,9 @@ public class UserController {
     }
 
     @PutMapping("/user/update")
-    public UserResponse updateUser(@RequestBody UserUpdateRequest request) {
-        User updatedUser = userService.updateUser(request.getToken(), request.getUserName(), request.getEmail(),
+    public UserResponse updateUser(@RequestHeader("Authorization") String token,@RequestBody UserUpdateRequest request) {
+        String userToken= jwtUtility.bearerToken(token);
+        User updatedUser = userService.updateUser(userToken, request.getUserName(), request.getEmail(),
                 request.getPhoneNumber(), request.getJob());
         return new UserResponse(updatedUser.getId(), updatedUser.getUserName(), updatedUser.getEmail(),
                 updatedUser.getPhoneNumber(), updatedUser.getBirthDate(),
@@ -54,7 +57,8 @@ public class UserController {
     }
 
     @DeleteMapping("/user/delete")
-    public void deleteUser(@RequestBody UserDeleteRequest request){
-        userService.deleteUser(request.getToken());
+    public void deleteUser(@RequestHeader("Authorization") String token){
+        String userToken= jwtUtility.bearerToken(token);
+        userService.deleteUser(userToken);
     }
 }

@@ -19,9 +19,7 @@ public class UserReport {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "chatReport_id")
-    private ChatReport chatReport;
+
 
     private String emotion;//Json써야함
     private String happy;
@@ -34,9 +32,8 @@ public class UserReport {
     private LocalDateTime updateAt;
 
 
-    public UserReport(User user, ChatReport chatReport, String emotion, String happy, String anxious, String neutral, String sad, String angry) {
+    public UserReport(User user, String emotion, String happy, String anxious, String neutral, String sad, String angry) {
         this.user = user;
-        this.chatReport = chatReport;
         this.emotion = emotion;
         this.happy = happy;
         this.anxious = anxious;
@@ -48,7 +45,5 @@ public class UserReport {
     }
 
     public void updateUserReport(String emotion){
-        this.emotion=emotion; //여기도 Json으로 바꿔서 해야됨
-        this.updateAt=LocalDateTime.now();
     }
 }
