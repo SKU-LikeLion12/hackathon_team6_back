@@ -3,7 +3,6 @@ package com.feelinsight.feelinsight.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -20,35 +19,39 @@ public class UserReport {
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "chatReport_id")
-    private ChatReport chatReport;
+    @JoinColumn(name = "emotion_id")
+    private Emotion emotion;
 
-    private String emotion;//Json써야함
-    private String happy;
-    private String anxious;
-    private String neutral;
-    private String sad;
-    private String angry;
+    @OneToOne
+    @JoinColumn(name = "situation_id")
+    private Situation situation;
+
+    private int happinessAtTotal;
+    private int anxietyAtTotal;
+    private int sadnessAtTotal;
+    private int angerAtTotal;
 
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
 
-    public UserReport(User user, ChatReport chatReport, String emotion, String happy, String anxious, String neutral, String sad, String angry) {
+    public UserReport(User user, Emotion emotion, int happinessAtTotal, int anxietyAtTotal, int sadnessAtTotal, int angerAtTotal) {
         this.user = user;
-        this.chatReport = chatReport;
         this.emotion = emotion;
-        this.happy = happy;
-        this.anxious = anxious;
-        this.neutral = neutral;
-        this.sad = sad;
-        this.angry = angry;
+        this.happinessAtTotal = happinessAtTotal;
+        this.anxietyAtTotal = anxietyAtTotal;
+        this.sadnessAtTotal = sadnessAtTotal;
+        this.angerAtTotal = angerAtTotal;
         this.createAt=LocalDateTime.now();
         this.updateAt=this.createAt;
     }
 
-    public void updateUserReport(String emotion){
-        this.emotion=emotion; //여기도 Json으로 바꿔서 해야됨
+    public void updateUserReport(Emotion emotion, int happinessAtTotal, int anxietyAtTotal, int sadnessAtTotal, int angerAtTotal){
+        this.emotion = emotion;
+        this.happinessAtTotal = happinessAtTotal;
+        this.anxietyAtTotal = anxietyAtTotal;
+        this.sadnessAtTotal = sadnessAtTotal;
+        this.angerAtTotal = angerAtTotal;
         this.updateAt=LocalDateTime.now();
     }
 }

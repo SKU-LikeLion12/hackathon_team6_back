@@ -16,31 +16,35 @@ import java.time.LocalDateTime;
 public class Diary {
     @Id @GeneratedValue
     private long diaryId;
+
     @OneToOne
-    @JoinColumn(name="chatReport_id")
-    private ChatReport chatReport;
+    @JoinColumn(name="emotion_id")
+    private Emotion emotion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
-    private LocalDate date;
 
+    @OneToOne
+    @JoinColumn(name="chat_id")
+    private Chat chat;
+
+    private LocalDate date;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
-    private String content;
-
-    public Diary(User user, LocalDate date, String content, ChatReport chatReport){
+    public Diary(User user, LocalDate date, Chat chat, Emotion emotion){
         this.user=user;
-        this.chatReport=chatReport;
+        this.emotion = emotion;
         this.date=date;
-        this.content=content;
+        this.chat=chat;
         this.createAt=LocalDateTime.now();
         this.updateAt=this.createAt;
     }
 
-    public void updateDiary(String content){
-        this.content=content;
+    public void updateDiary(Chat chat){
+        this.chat=chat;
         this.updateAt=LocalDateTime.now();
     }
 
