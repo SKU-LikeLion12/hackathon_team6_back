@@ -16,14 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ChatService {
     private final ChatRepository chatRepository;
-
-    public ChatService(ChatRepository chatRepository) {
-        this.chatRepository = chatRepository;
-    }
 
     public void processChatData(ChatDTO chatData) {
         Chat chat = convertToChat(chatData);
