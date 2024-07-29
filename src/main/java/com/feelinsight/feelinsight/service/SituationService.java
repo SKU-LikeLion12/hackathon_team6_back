@@ -1,6 +1,7 @@
 package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
+import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.domain.Situation;
 import com.feelinsight.feelinsight.repository.SituationRepository;
 import java.util.Map;
@@ -28,6 +29,8 @@ public class SituationService {
         entity.setAngerAt(situationMap.get("분노"));
         return entity;
     }
+
+    public Situation findBySituationId(Long situationId){return situationRepository.findBySituationId(situationId);}
 
 
 //    public Situation getSituationByChatId(Long chatId) {
