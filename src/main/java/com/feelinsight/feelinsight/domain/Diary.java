@@ -21,6 +21,7 @@ public class Diary {
     @JoinColumn(name="emotion_id")
     private Emotion emotion;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -28,24 +29,31 @@ public class Diary {
 
     @OneToOne
     @JoinColumn(name="chat_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Chat chat;
 
     private LocalDate date;
+
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
-    public Diary(User user, LocalDate date, Chat chat, Emotion emotion){
+
+    public Diary(User user, LocalDate date, Emotion emotion, Chat chat){
         this.user=user;
-        this.emotion = emotion;
         this.date=date;
+        this.emotion=emotion;
         this.chat=chat;
         this.createAt=LocalDateTime.now();
         this.updateAt=this.createAt;
     }
 
-    public void updateDiary(Chat chat){
-        this.chat=chat;
+    public void updateDiary(String content){
+        this.chat.setMessage(content);
         this.updateAt=LocalDateTime.now();
+    }
+
+    public String getChatMessage(){
+        return this.chat.getMessage();
     }
 
 }

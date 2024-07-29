@@ -3,12 +3,13 @@ package com.feelinsight.feelinsight.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter@Setter
 @Entity
 public class Chat {
     @Id @GeneratedValue

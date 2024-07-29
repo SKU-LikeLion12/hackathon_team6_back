@@ -18,24 +18,26 @@ public class UserReport {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @OneToOne
     @JoinColumn(name = "emotion_id")
     private Emotion emotion;
+
 
     @OneToOne
     @JoinColumn(name = "situation_id")
     private Situation situation;
 
-    private int happinessAtTotal;
-    private int anxietyAtTotal;
-    private int sadnessAtTotal;
-    private int angerAtTotal;
+    private String happinessAtTotal;
+    private String anxietyAtTotal;
+    private String sadnessAtTotal;
+    private String angerAtTotal;
 
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
 
-    public UserReport(User user, Emotion emotion, int happinessAtTotal, int anxietyAtTotal, int sadnessAtTotal, int angerAtTotal) {
+    public UserReport(User user, Emotion emotion, String happinessAtTotal, String anxietyAtTotal, String sadnessAtTotal, String angerAtTotal) {
         this.user = user;
         this.emotion = emotion;
         this.happinessAtTotal = happinessAtTotal;
@@ -46,7 +48,7 @@ public class UserReport {
         this.updateAt=this.createAt;
     }
 
-    public void updateUserReport(Emotion emotion, int happinessAtTotal, int anxietyAtTotal, int sadnessAtTotal, int angerAtTotal){
+    public void updateUserReport(Emotion emotion, String happinessAtTotal, String anxietyAtTotal, String sadnessAtTotal, String angerAtTotal){
         this.emotion = emotion;
         this.happinessAtTotal = happinessAtTotal;
         this.anxietyAtTotal = anxietyAtTotal;
