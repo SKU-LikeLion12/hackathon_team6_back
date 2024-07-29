@@ -1,9 +1,7 @@
 package com.feelinsight.feelinsight.DTO;
 
-import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.domain.Situation;
 import com.feelinsight.feelinsight.domain.User;
-import java.time.LocalDateTime;
 import lombok.Data;
 
 public class SituationDTO {

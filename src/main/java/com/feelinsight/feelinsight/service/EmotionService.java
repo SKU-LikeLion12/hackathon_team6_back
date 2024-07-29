@@ -3,6 +3,7 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.domain.Emotion;
+import com.feelinsight.feelinsight.domain.Situation;
 import com.feelinsight.feelinsight.repository.EmotionRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,8 @@ public class EmotionService {
 
         return entity;
     }
+
+    public Emotion findByEmotionId(Long emotionId){return emotionRepository.findByEmotionId(emotionId);}
 //
 //
 //    public Emotion getEmotionByChatId(Long chatId) {

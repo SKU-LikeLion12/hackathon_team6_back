@@ -1,5 +1,9 @@
 package com.feelinsight.feelinsight.repository;
 
-public interface EmotionRepositoryIN {
+import com.feelinsight.feelinsight.domain.Chat;
+import com.feelinsight.feelinsight.domain.Emotion;
 
+public interface EmotionRepositoryIN {
+    Emotion saveEmotion(Emotion emotion);
+    Emotion findByEmotionId(Long emotionId);
 }
