@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class SituationService {
     private final SituationRepository situationRepository;
 
-    public void processSituationData(ChatDTO chatData) {
-        Situation situation = convertToSituation(chatData);
+    public void processSituationData(ChatDTO.ChatTransfer chatTransfer) {
+        Situation situation = convertToSituation(chatTransfer);
         situationRepository.saveSituation(situation);
     }
 
-    private Situation convertToSituation(ChatDTO chatData){
+    private Situation convertToSituation(ChatDTO.ChatTransfer chatTransfer){
         Situation entity = new Situation();
-        Map<String, String> situationMap = chatData.getSituation();
+        Map<String, String> situationMap = chatTransfer.getSituation();
         entity.setHappinessAt(situationMap.get("행복"));
         entity.setAnxietyAt(situationMap.get("불안"));
         entity.setSadnessAt(situationMap.get("슬픔"));

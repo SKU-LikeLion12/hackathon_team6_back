@@ -12,18 +12,13 @@ import org.springframework.stereotype.Repository;
 public class ChatRepository implements ChatRepositoryIN{
     private final EntityManager em;
     @Override
-    public List<Chat> findByUserAndIsRefined(User user, boolean isRefined) {
-        return null;
-    }
-
-    @Override
     public Chat saveNewChat(Chat chat) {
         em.persist(chat);
         return chat;
     }
 
     @Override
-    public Chat findById(Long id){
-        return em.find(Chat.class, id);
+    public Chat findByChatId(Long ChatId){
+        return em.find(Chat.class, ChatId);
     }
 }

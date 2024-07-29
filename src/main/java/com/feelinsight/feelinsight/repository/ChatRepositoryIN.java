@@ -5,10 +5,8 @@ import com.feelinsight.feelinsight.domain.User;
 import java.util.List;
 
 public interface ChatRepositoryIN{
-    List<Chat> findByUserAndIsRefined(User user, boolean isRefined);
-
     Chat saveNewChat(Chat chat);
 
-    Chat findById(Long id);
+    Chat findByChatId(Long ChatId);
 
 }

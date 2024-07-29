@@ -19,9 +19,7 @@ public class Chat {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
     private String message;
-
 
     public Chat(User user, String message) {
         this.user = user;
@@ -32,5 +30,4 @@ public class Chat {
     public void endChat() {
         this.endTime = LocalDateTime.now();
     }
-
 }

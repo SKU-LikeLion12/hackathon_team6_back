@@ -2,11 +2,8 @@ package com.feelinsight.feelinsight.service;
 
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
-import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.domain.Emotion;
 import com.feelinsight.feelinsight.repository.EmotionRepository;
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,14 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmotionService {
     private final EmotionRepository emotionRepository;
 
-    public void processEmotionData(ChatDTO chatData) {
-        Emotion emotion = convertToEmotion(chatData);
+    public void processEmotionData(ChatDTO.ChatTransfer chatTransfer) {
+        Emotion emotion = convertToEmotion(chatTransfer);
         emotionRepository.saveEmotion(emotion);
     }
 
-    private Emotion convertToEmotion(ChatDTO chatData) {
+    private Emotion convertToEmotion(ChatDTO.ChatTransfer chatTransfer) {
         Emotion entity = new Emotion();
-        Map<String, Integer> emotions = chatData.getEmotions();
+        Map<String, Integer> emotions = chatTransfer.getEmotions();
 
         entity.setHappiness(emotions.getOrDefault("행복", 0));
         entity.setAnxiety(emotions.getOrDefault("불안", 0));
