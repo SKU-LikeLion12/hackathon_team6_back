@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter@Setter
 @Entity
-//챗봇 대화 데이터
 public class Chat {
     @Id @GeneratedValue
     private Long chatId;
@@ -20,9 +20,7 @@ public class Chat {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
-    private String message; //JSON써야함
-
+    private String message;
 
     public Chat(User user, String message) {
         this.user = user;
@@ -33,5 +31,4 @@ public class Chat {
     public void endChat() {
         this.endTime = LocalDateTime.now();
     }
-
 }
