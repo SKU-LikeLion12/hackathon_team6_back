@@ -1,13 +1,19 @@
 package com.feelinsight.feelinsight.controller;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
+import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
+import com.feelinsight.feelinsight.DTO.UserDTO.UserResponse;
+import com.feelinsight.feelinsight.domain.Chat;
+import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.service.ChatService;
 import com.feelinsight.feelinsight.service.EmotionService;
 import com.feelinsight.feelinsight.service.SituationService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +30,11 @@ public class ChatController {
         chatService.processChatData(chatTransfer);
         emotionService.processEmotionData(chatTransfer);
         return new ResponseEntity<>("대화 데이터가 성공적으로 처리되어 저장되었습니다.", HttpStatus.OK);
+    }
+    @GetMapping("/chat/{chatId}")
+    public ChatResponse getChat(@Parameter(description = "chat ID", example = "test_id")@PathVariable("id") Long chatId){
+        Chat chat = chatService.findByChatId(chatId);
+        ChatResponse chatresponse = new ChatResponse(chat);
+        return chatresponse;
     }
 }

@@ -30,5 +30,5 @@ public class ChatService {
         return entity;
     }
 
-    private Chat findByChatId(Long chatId){return chatRepository.findByChatId(chatId);}
+    public Chat findByChatId(Long chatId){return chatRepository.findByChatId(chatId);}
 }
