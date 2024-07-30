@@ -3,7 +3,6 @@ package com.feelinsight.feelinsight.DTO;
 import com.feelinsight.feelinsight.domain.Diary;
 import com.feelinsight.feelinsight.domain.Emotion;
 import lombok.Data;
-import org.springframework.cglib.core.Local;
 
 
 import java.time.LocalDate;

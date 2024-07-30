@@ -1,6 +1,6 @@
 package com.feelinsight.feelinsight.controller;
 
-import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
+
 import com.feelinsight.feelinsight.DTO.SituationDTO.SituationResponse;
 import com.feelinsight.feelinsight.domain.Situation;
 import com.feelinsight.feelinsight.service.SituationService;

@@ -1,6 +1,5 @@
 package com.feelinsight.feelinsight.controller;
 
-import com.feelinsight.feelinsight.DTO.CalendarDTO;
 import com.feelinsight.feelinsight.DTO.CalendarDTO.*;
 import com.feelinsight.feelinsight.DTO.DiaryDTO.*;
 import com.feelinsight.feelinsight.domain.Chat;
@@ -24,7 +23,7 @@ public class DiaryController {
     @PostMapping("/diary/save")
     public ResponseCalendar createDiary(@RequestHeader("Authorization") String token, @RequestBody RequestDiary requestDiary){
         String userToken =jwtUtility.bearerToken(token);
-        String userId=userService.tokenToUser(token).getId();
+        String userId=userService.tokenToUser(userToken).getId();
         Chat chat=new Chat();
         chat.setMessage(requestDiary.getContent());
         Diary diary=diaryService.saveDiary(userId, chat, requestDiary.getDate(), requestDiary.getEmotion());

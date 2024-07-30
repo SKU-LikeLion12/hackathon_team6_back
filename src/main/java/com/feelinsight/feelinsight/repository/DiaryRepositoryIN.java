@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DiaryRepositoryIN {
-    public Diary saveDiary(Diary diary);
-    public void deleteDiary(Diary diary);
-    public Diary findByDiaryId(Long diaryId);
-    public Diary findByuserIdAndDate(Long userId, LocalDate date);
-    public List<Diary> findByAll();
-    public List<Diary> findByUserAll(Long userId);
-    public List<Diary> findByUserIdAndMonth(Long id, LocalDate month);
+    Diary saveDiary(Diary diary);
+    void deleteDiary(Diary diary);
+    Diary findByDiaryId(Long diaryId);
+    Diary findByuserIdAndDate(Long userId, LocalDate date);
+    List<Diary> findByAll();
+    List<Diary> findByUserAll(Long userId);
+    List<Diary> findByUserIdAndMonth(Long id, LocalDate month);
 }

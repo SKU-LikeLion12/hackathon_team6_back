@@ -1,9 +1,7 @@
 package com.feelinsight.feelinsight.repository;
 
 import com.feelinsight.feelinsight.domain.Chat;
-import com.feelinsight.feelinsight.domain.User;
 import jakarta.persistence.EntityManager;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

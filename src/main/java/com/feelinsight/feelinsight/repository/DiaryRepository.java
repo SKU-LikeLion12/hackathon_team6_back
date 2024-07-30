@@ -14,7 +14,7 @@ import java.util.List;
 public class DiaryRepository implements DiaryRepositoryIN{
 
     private final EntityManager em;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Diary saveDiary(Diary diary) {

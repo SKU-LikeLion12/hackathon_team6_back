@@ -1,7 +1,6 @@
 package com.feelinsight.feelinsight.repository;
 
 import com.feelinsight.feelinsight.domain.Post;
-import com.feelinsight.feelinsight.domain.User;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,10 +35,9 @@ public class PostRepository implements PostRepositoryIN{
     }
 
     @Override
-    public List<Post> findByUserId(Long userId){
-        User user=userRepository.findByUserId(userId);
-        return em.createQuery("select p from Post p where p.user=:u",Post.class)
-                .setParameter("u",user)
+    public List<Post> findByEmotionType(String emotionType) {
+        return em.createQuery("select p from Post p where p.emotionType=:et",Post.class)
+                .setParameter("et",emotionType)
                 .getResultList();
     }
 }

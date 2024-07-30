@@ -2,7 +2,6 @@ package com.feelinsight.feelinsight.DTO;
 
 import com.feelinsight.feelinsight.domain.Diary;
 import com.feelinsight.feelinsight.domain.Emotion;
-import com.feelinsight.feelinsight.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
