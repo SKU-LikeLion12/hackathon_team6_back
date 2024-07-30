@@ -3,11 +3,12 @@ package com.feelinsight.feelinsight.repository;
 import com.feelinsight.feelinsight.domain.Post;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Repository
 @RequiredArgsConstructor
 public class PostRepository implements PostRepositoryIN{
     private final EntityManager em;

@@ -1,14 +1,18 @@
 package com.feelinsight.feelinsight.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import com.feelinsight.feelinsight.domain.Post;
 import com.feelinsight.feelinsight.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 @Component
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class DataInitiallizer implements CommandLineRunner {
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Override
     public void run(String... args) throws Exception {
