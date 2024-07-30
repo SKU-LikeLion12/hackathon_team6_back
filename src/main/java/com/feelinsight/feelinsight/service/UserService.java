@@ -36,7 +36,13 @@ public class UserService {
         return userRepository.save(new User(userName, Id, email, password, phoneNumber, birthDate, job, gender));
     }
 
-    public User findByUserId(Long userId){return userRepository.findByUserId(userId);}
+    public User findByUserId(Long userId){
+        User user=userRepository.findByUserId(userId);
+        if(user==null){
+            throw new IdNotFoundException();
+        }
+        return user;
+    }
 
     public String login(String Id, String passwd){
         User user=findById(Id);

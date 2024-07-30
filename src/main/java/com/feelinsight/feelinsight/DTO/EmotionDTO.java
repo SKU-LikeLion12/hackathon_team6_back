@@ -25,4 +25,14 @@ public class EmotionDTO {
             this.anger = emotion.getAnger();
         }
     }
+
+    @Data
+    public static class RequestEmotion{
+        private Long userId;
+        private int happiness;
+        private int anxiety;
+        private int neutral;
+        private int sadness;
+        private int anger;
+    }
 }

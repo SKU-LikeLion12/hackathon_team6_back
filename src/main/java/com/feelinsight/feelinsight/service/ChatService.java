@@ -2,7 +2,6 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.domain.Chat;
-import com.feelinsight.feelinsight.exception.IdNotFoundException;
 import com.feelinsight.feelinsight.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

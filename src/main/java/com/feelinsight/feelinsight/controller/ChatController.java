@@ -2,9 +2,7 @@ package com.feelinsight.feelinsight.controller;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
-import com.feelinsight.feelinsight.DTO.UserDTO.UserResponse;
 import com.feelinsight.feelinsight.domain.Chat;
-import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.service.ChatService;
 import com.feelinsight.feelinsight.service.EmotionService;
 import com.feelinsight.feelinsight.service.SituationService;

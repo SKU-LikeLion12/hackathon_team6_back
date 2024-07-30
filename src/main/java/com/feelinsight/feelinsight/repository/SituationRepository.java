@@ -1,7 +1,5 @@
 package com.feelinsight.feelinsight.repository;
 
-import com.feelinsight.feelinsight.domain.Chat;
-import com.feelinsight.feelinsight.domain.Emotion;
 import com.feelinsight.feelinsight.domain.Situation;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

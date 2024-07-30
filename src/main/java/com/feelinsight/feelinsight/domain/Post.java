@@ -14,30 +14,25 @@ public class Post {
     @Id @GeneratedValue
     private Long postId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userReport_id")
-    private UserReport userReport;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
     private String title;
-
     private String content;
+    private String emotionType;
+
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
-    public Post(UserReport userReport, User user, String title, String content){
-        this.userReport=userReport;
-        this.user=user;
+    public Post(String title, String content, String emotionType){
         this.title=title;
         this.content=content;
+        this.emotionType=emotionType;
         this.createAt=LocalDateTime.now();
         this.updateAt=this.createAt;
     }
 
-    public void updatePost(String content){
+    public void updatePost(String title,String content, String emotionType){
+        this.title=title;
         this.content=content;
+        this.emotionType=emotionType;
         this.updateAt=LocalDateTime.now();
     }
 

@@ -1,7 +1,6 @@
 package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
-import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.domain.Situation;
 import com.feelinsight.feelinsight.repository.SituationRepository;
 import java.util.Map;
