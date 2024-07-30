@@ -21,12 +21,12 @@ public class DiaryController {
     private final UserService userService;
 
     @PostMapping("/diary/save")
-    public ResponseCalendar createDiary(@RequestHeader("Authorization") String token, @RequestBody RequestDiary requestDiary){
-        String userToken =jwtUtility.bearerToken(token);
-        String userId=userService.tokenToUser(userToken).getId();
-        Chat chat=new Chat();
+    public ResponseCalendar createDiary(@RequestHeader("Authorization") String token, @RequestBody RequestDiary requestDiary) {
+        String userToken = jwtUtility.bearerToken(token);
+        String userId = userService.tokenToUser(userToken).getId();
+        Chat chat = new Chat();
         chat.setMessage(requestDiary.getContent());
-        Diary diary=diaryService.saveDiary(userId, chat, requestDiary.getDate(), requestDiary.getEmotion());
+        Diary diary = diaryService.saveDiary(userId, chat, requestDiary.getDate(), requestDiary.getEmotion());
         return new ResponseCalendar(diary);
     }
 
