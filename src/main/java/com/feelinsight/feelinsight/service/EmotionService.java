@@ -3,6 +3,7 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.domain.Emotion;
+import com.feelinsight.feelinsight.exception.EmotionNotFoundException;
 import com.feelinsight.feelinsight.repository.EmotionRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,13 @@ public class EmotionService {
     private final EmotionRepository emotionRepository;
 
     public void processEmotionData(ChatDTO.ChatTransfer chatTransfer) {
-        Emotion emotion = convertToEmotion(chatTransfer);
-        emotionRepository.saveEmotion(emotion);
+        try{
+            Emotion emotion = convertToEmotion(chatTransfer);
+            emotionRepository.saveEmotion(emotion);
+        }catch(Exception e){
+            throw new RuntimeException("감정 데이터를 처리하는 중 오류가 발생했습니다.",e);
+        }
+
     }
 
     private Emotion convertToEmotion(ChatDTO.ChatTransfer chatTransfer) {
@@ -34,11 +40,21 @@ public class EmotionService {
     }
 
     public void updateEmotion(Long userId, int happiness, int anxiety, int neutral, int sadness, int anger){
-        emotionRepository.updateEmotion(userId, happiness, anxiety, neutral, sadness, anger);
+        try{
+            emotionRepository.updateEmotion(userId, happiness, anxiety, neutral, sadness, anger);
+        }catch (Exception e){
+            throw new RuntimeException("감정 데이터를 업데이트하는 중 오류가 발생했습니다.");
+        }
+
     }
-    public Emotion findByEmotionId(Long emotionId){return emotionRepository.findByEmotionId(emotionId);}
-//
-//
+    public Emotion findByEmotionId(Long emotionId){
+        Emotion emotion = emotionRepository.findByEmotionId(emotionId);
+        if(emotion==null){
+            throw new EmotionNotFoundException("해당 ID의 감정데이터를 찾을 수 없습니다.");
+        }
+        return emotion;
+    }
+
 //    public Emotion getEmotionByChatId(Long chatId) {
 //        return emotionRepository.findByChatId(chatId)
 //                .orElseThrow(() -> new EntityNotFoundException("Emotion not found for chat id: " + chatId));

@@ -6,6 +6,7 @@ import com.feelinsight.feelinsight.domain.Diary;
 import com.feelinsight.feelinsight.domain.Emotion;
 import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.exception.DiaryNotFoundException;
+import com.feelinsight.feelinsight.exception.IdNotFoundException;
 import com.feelinsight.feelinsight.repository.DiaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class DiaryService {
     public Diary updateDiary(Long diaryId, String content, String token ){
         Diary diary=diaryRepository.findByDiaryId(diaryId);
         if(diary==null){
-            throw new DiaryNotFoundException("Diary not found");
+            throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
         User user= userService.tokenToUser(token);
         if(user==diary.getUser()){
@@ -49,7 +50,7 @@ public class DiaryService {
     public void deleteDiary(Long diaryId, String token){
         Diary diary = diaryRepository.findByDiaryId(diaryId);
         if(diary==null){
-            throw new DiaryNotFoundException("Diary not found");
+            throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
         User user=userService.tokenToUser(token);
         if(user==diary.getUser()){
@@ -61,14 +62,14 @@ public class DiaryService {
         User user=userService.findById(id);
         Diary diary=diaryRepository.findByuserIdAndDate(user.getUserId(), date);
         if(diary==null){
-            throw new DiaryNotFoundException("Diary not found");
+            throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
         return diary;
     }
     public Diary findDiary(Long diaryId){
         Diary diary=diaryRepository.findByDiaryId(diaryId);
         if(diary==null){
-            throw new DiaryNotFoundException("Diary not found");
+            throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
         return diary;
     }
@@ -80,6 +81,9 @@ public class DiaryService {
 
     public TopEmotionResponse getTopEmotionByDate(String userId, LocalDate month) {
         User user = userService.findById(userId);
+        if(user==null){
+            throw new IdNotFoundException("사용자를 찾을 수 없습니다.");
+        }
         List<Diary> diaries = diaryRepository.findByUserIdAndMonth(user.getUserId(), month);
         Map<LocalDate, String> topEmotions = new HashMap<>();
 
