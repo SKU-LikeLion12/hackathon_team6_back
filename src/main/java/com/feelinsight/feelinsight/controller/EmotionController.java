@@ -23,7 +23,7 @@ public class EmotionController {
                     @ApiResponse(responseCode = "404", description = "감정을 찾을 수 없음"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @GetMapping("/emotion/{emotionId}")
-    public ResponseEntity<EmotionResponse> getEmotion(@Parameter(description = "emotion ID", example = "test_id")@PathVariable("id") Long emotionId){
+    public ResponseEntity<EmotionResponse> getEmotion(@Parameter(description = "emotion ID", example = "test_id")@PathVariable("emotionId") Long emotionId){
         try{
             Emotion emotion = emotionService.findByEmotionId(emotionId);
             EmotionResponse emotionresponse = new EmotionResponse(emotion);
