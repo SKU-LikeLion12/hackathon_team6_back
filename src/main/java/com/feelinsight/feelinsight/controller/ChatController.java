@@ -9,6 +9,7 @@ import com.feelinsight.feelinsight.service.EmotionService;
 import com.feelinsight.feelinsight.service.SituationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,9 @@ public class ChatController {
     private final SituationService situationService;
     private final EmotionService emotionService;
 
-    @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장")
+    @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
+            responses = {@ApiResponse(responseCode = "200", description = "성공"),
+                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
     @PostMapping("/api/chat")
     public ResponseEntity<String> receiveChatData(@RequestBody ChatDTO.ChatTransfer chatTransfer) {
         try{
@@ -39,7 +42,10 @@ public class ChatController {
 
     }
 
-    @Operation(summary = "대화내용 찾기", description = "경로의 chat의 Id로 chat의 정보 찾기")
+    @Operation(summary = "대화내용 찾기", description = "경로의 chat의 Id로 chat의 정보 찾기",
+            responses = {@ApiResponse(responseCode = "200", description = "성공"),
+                        @ApiResponse(responseCode = "404", description = "대화데이터 를 찾을 수 없음"),
+                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
     @GetMapping("/chat/{chatId}")
 
     public ResponseEntity<ChatResponse> getChat(@Parameter(description = "chat ID", example = "test_id") @PathVariable("chatId") Long chatId) {

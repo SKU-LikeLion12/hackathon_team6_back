@@ -7,6 +7,7 @@ import com.feelinsight.feelinsight.exception.SituationNotFoundException;
 import com.feelinsight.feelinsight.service.SituationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class SituationController {
     private final SituationService situationService;
 
-    @Operation(summary = "감정 상황 조회", description = "경로의 situation_id로 감정 상황 조회")
+    @Operation(summary = "감정 상황 조회", description = "경로의 situation_id로 감정 상황 조회",
+            responses = {@ApiResponse(responseCode = "201", description = "성공"),
+                    @ApiResponse(responseCode = "404", description = "상황데이터 를 찾을 수 없음"),
+                    @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
     @GetMapping("/situation/{situationId}")
     public ResponseEntity<SituationResponse> getSituation(@Parameter(description = "situation ID", example = "test_id") @PathVariable("situationId") Long situationId) {
         try {
