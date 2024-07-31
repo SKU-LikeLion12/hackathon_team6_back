@@ -24,9 +24,9 @@ public class  UserController {
     private final UserService userService;
     private final JwtUtility jwtUtility;
 
-    @Operation(summary="회원가입", description = "정보를 입력하고 회원가입 시도", tags = {"user"},
+    @Operation(summary="회원가입", description = "정보를 입력하고 회원가입 시도",
         responses = {@ApiResponse(responseCode = "201", description = "생성 성공 후 토큰 변환"),
-                    @ApiResponse(responseCode = "409", description = "중복 아이디로 인한 생성 실패")})
+                    @ApiResponse(responseCode = "401", description = "중복 아이디로 인한 생성 실패")})
     @PostMapping("/user/signup")
     public ResponseEntity<String> signUp(@RequestBody UserCreateRequest request){
         try{
@@ -45,7 +45,7 @@ public class  UserController {
         }
     }
 
-    @Operation(summary="로그인", description = "아이디와 패스워드를 입력하고 로그인 시도", tags = {"user"},
+    @Operation(summary="로그인", description = "아이디와 패스워드를 입력하고 로그인 시도",
             responses = {@ApiResponse(responseCode = "202", description = "로그인 성공"),
                     @ApiResponse(responseCode = "401", description = "아이디 또는 비밀번호 오류")})
     @PostMapping("/user/login")
@@ -61,7 +61,7 @@ public class  UserController {
         }
     }
 
-    @Operation(summary="로그아웃", description = "사용자 로그아웃", tags = {"user"},
+    @Operation(summary="로그아웃", description = "사용자 로그아웃",
             responses = {@ApiResponse(responseCode = "202", description = "로그아웃 성공")})
     @PostMapping("/user/logout")
     public ResponseEntity<String> logout(@RequestHeader("Authorization") String token){
@@ -75,7 +75,7 @@ public class  UserController {
         }
     }
 
-    @Operation(summary="사용자 조회", description = "id로 사용자를 조회", tags = {"user"},
+    @Operation(summary="사용자 조회", description = "id로 사용자를 조회",
             responses = {@ApiResponse(responseCode = "200", description = "성공"),
                     @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")})
     @GetMapping("/user/{id}")
@@ -93,7 +93,7 @@ public class  UserController {
         }
     }
 
-    @Operation(summary="사용자 업데이트", description = "사용자 정보 업데이트", tags = {"user"},
+    @Operation(summary="사용자 업데이트", description = "사용자 정보 업데이트",
             responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공"),
                     @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰")})
@@ -117,7 +117,7 @@ public class  UserController {
         }
     }
 
-    @Operation(summary="사용자 삭제", description = "사용자 삭제", tags = {"user"},
+    @Operation(summary="사용자 삭제", description = "사용자 삭제",
             responses = {@ApiResponse(responseCode = "200", description = "성공"),
                     @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰")})
