@@ -2,6 +2,7 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.domain.Situation;
+import com.feelinsight.feelinsight.exception.SituationNotFoundException;
 import com.feelinsight.feelinsight.repository.SituationRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SituationService {
     private final SituationRepository situationRepository;
 
+    @Transactional
     public void processSituationData(ChatDTO.ChatTransfer chatTransfer) {
-        Situation situation = convertToSituation(chatTransfer);
-        situationRepository.saveSituation(situation);
+        try {
+            Situation situation = convertToSituation(chatTransfer);
+            situationRepository.saveSituation(situation);
+        } catch (Exception e) {
+            throw new RuntimeException("상황 데이터를 처리하는 중 오류가 발생했습니다.", e);
+        }
     }
+
 
     private Situation convertToSituation(ChatDTO.ChatTransfer chatTransfer){
         Situation entity = new Situation();
@@ -29,7 +36,13 @@ public class SituationService {
         return entity;
     }
 
-    public Situation findBySituationId(Long situationId){return situationRepository.findBySituationId(situationId);}
+    public Situation findBySituationId(Long situationId){
+        Situation situation = situationRepository.findBySituationId(situationId);
+        if(situation==null){
+            throw new SituationNotFoundException("해당 ID의 상황 데이터를 찾을 수 없습니다.");
+        }
+        return situation;
+    }
 
 
 //    public Situation getSituationByChatId(Long chatId) {

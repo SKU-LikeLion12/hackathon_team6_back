@@ -29,7 +29,7 @@ public class PostService {
     public void deletePost(Long postId){
         Post post=postRepository.findByPostId(postId);
         if(post==null){
-            throw new PostNotFoundException("Post not found");
+            throw new PostNotFoundException("추천활동을 찾을 수 없습니다.");
         }
         else{
             postRepository.deletePost(post);
@@ -40,7 +40,7 @@ public class PostService {
     public Post updatePost(Long postId, String title, String content, String emotionType){
         Post post=postRepository.findByPostId(postId);
         if(post==null){
-            throw new PostNotFoundException("Post not found");
+            throw new PostNotFoundException("추천활동을 찾을 수 없습니다.");
         }else{
             post.updatePost(title, content, emotionType);
             return post;
@@ -50,7 +50,7 @@ public class PostService {
     public Post findByPostId(Long postId){
         Post post=postRepository.findByPostId(postId);
         if(post==null){
-            throw new PostNotFoundException("Post not fonud");
+            throw new PostNotFoundException("추천활동을 찾을 수 없습니다.");
         }else{
             return post;
         }
@@ -59,7 +59,7 @@ public class PostService {
     public List<Post> findAllPost(){
         List<Post> list=postRepository.findAllPost();
         if(list.isEmpty()){
-            throw new PostNotFoundException("Posts not found");
+            throw new PostNotFoundException("추천활동을 찾을 수 없습니다.");
         }else{
             return list;
         }
