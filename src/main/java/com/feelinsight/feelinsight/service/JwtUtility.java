@@ -32,7 +32,7 @@ public class JwtUtility {
         } catch (SignatureException | ExpiredJwtException e) {
             throw new InvalidTokenException("유효하지 않은 토큰입니다.");
         }catch (Exception e) {
-            throw new InvalidTokenException("토큰 검증 중 오류가 발생했습니다.")
+            throw new InvalidTokenException("토큰 검증 중 오류가 발생했습니다.");
         }
     }
 
