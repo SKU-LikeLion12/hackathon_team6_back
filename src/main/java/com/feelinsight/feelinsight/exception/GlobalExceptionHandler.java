@@ -41,11 +41,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(PostNotFoundException.class)
-<<<<<<< HEAD
     public ResponseEntity<String> handlePostNotFoundException(PostNotFoundException e){
-=======
-    public ResponseEntity<String> handlePostNotFoundException(PostNotFoundException e) {
->>>>>>> feature_jiu
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
