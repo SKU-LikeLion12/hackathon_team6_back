@@ -39,7 +39,6 @@ public class ChatController {
             e.printStackTrace();
             return new ResponseEntity<>("대화데이터를 처리하는 중 오류가 발생했습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     @Operation(summary = "대화내용 찾기", description = "경로의 chat의 Id로 chat의 정보 찾기",
@@ -47,7 +46,6 @@ public class ChatController {
                         @ApiResponse(responseCode = "404", description = "대화데이터 를 찾을 수 없음"),
                         @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
     @GetMapping("/chat/{chatId}")
-
     public ResponseEntity<ChatResponse> getChat(@Parameter(description = "chat ID", example = "test_id") @PathVariable("chatId") Long chatId) {
         try {
             Chat chat = chatService.findByChatId(chatId);

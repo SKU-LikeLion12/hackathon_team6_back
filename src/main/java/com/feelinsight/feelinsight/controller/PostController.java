@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+
     @Operation(summary = "추천 프로그램 저장", description = "프로그램 제목, 내용, 감정 타입을 받아 저장")
     @PostMapping("/post/save")
     public ResponseEntity<ResponsePost> createPost(@RequestBody RequestPost requestPost) {
@@ -28,6 +29,7 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
     @Operation(summary = "추천 프로그램 수정", description = "프로그램 제목, 내용, 감정 타입을 받아 수정")
     @PutMapping("/post/{postId}")
     public ResponseEntity<ResponsePost> updatePost(@PathVariable Long postId, @RequestBody RequestPost requestPost) {
@@ -41,6 +43,7 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
     @Operation(summary = "추천 프로그램 삭제", description = "경로의 post_id를 받아 프로그램 식제")
     @DeleteMapping("/post/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
