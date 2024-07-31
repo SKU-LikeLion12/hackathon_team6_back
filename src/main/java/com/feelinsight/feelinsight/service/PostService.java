@@ -68,8 +68,8 @@ public class PostService {
     public List<Post> getRecommendation(Long userId){
         Emotion emotion= emotionRepository.findByUserIdEmotion(userId);
         if(emotion !=null){
-            String negativeEmotion= emotion.getNagativeEmotion();
-            return postRepository.findByEmotionType(negativeEmotion);
+            String topEmotion= emotion.getTopEmotion();
+            return postRepository.findByEmotionType(topEmotion);
         }else{
             return List.of();
         }

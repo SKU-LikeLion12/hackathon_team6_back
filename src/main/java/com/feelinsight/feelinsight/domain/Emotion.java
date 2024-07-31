@@ -39,13 +39,13 @@ public class Emotion {
     }
 
     public void updateEmotion(int happiness, int anxiety, int neutral, int sadness, int anger) {
-        double weight=0.2;
-        this.happiness=(int)Math.round(this.happiness*(1-weight)+happiness*weight);
-        this.anxiety=(int)Math.round(this.anxiety*(1-weight)+anxiety*weight);
-        this.sadness=(int)Math.round(this.sadness*(1-weight)+sadness*weight);
-        this.anger=(int)Math.round(this.anger*(1-weight)+anger*weight);
-        this.neutral=(int)Math.round(this.neutral*(1-weight)+neutral*weight);
-        this.updateAt=LocalDateTime.now();
+        double weight = 0.2;
+        this.happiness = (int)Math.round(this.happiness * (1 - weight) + happiness * weight);
+        this.anxiety = (int)Math.round(this.anxiety * (1 - weight) + anxiety * weight);
+        this.sadness = (int)Math.round(this.sadness * (1 - weight) + sadness * weight);
+        this.anger = (int)Math.round(this.anger * (1 - weight) + anger * weight);
+        this.neutral = (int)Math.round(this.neutral * (1 - weight) + neutral * weight);
+        this.updateAt = LocalDateTime.now();
         normalize();
     }
 
@@ -60,12 +60,14 @@ public class Emotion {
         }
     }
 
-    public String getNagativeEmotion(){
-        if(anxiety>=sadness && anxiety>=anger){
+    public String getTopEmotion(){
+        if(anxiety >= sadness && anxiety >= anger && anxiety >= happiness){
             return "anxiety";
-        }else if(sadness >= anxiety && sadness>=anger){
+        }else if(sadness >= anxiety && sadness >= anger && sadness >= happiness){
             return "sadness";
-        }else{
+        } else if (happiness >= sadness && happiness >= anxiety && happiness >= anger) {
+            return "happiness";
+        } else{
             return "anger";
         }
     }
