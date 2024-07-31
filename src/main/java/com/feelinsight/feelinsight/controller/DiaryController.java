@@ -47,7 +47,8 @@ public class DiaryController {
         }
     }
     @Operation(summary = "일기 수정", description = "diary_id를 경로로 입력받고, 일기 내용을 입력 받아 수정",
-            responses = {@ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
+            responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공"),
+                    @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @PutMapping("/{diaryId}")
@@ -66,7 +67,8 @@ public class DiaryController {
 
     }
     @Operation(summary = "일기 삭제", description = "유저 토큰으로 일기 삭제",
-            responses = {@ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
+            responses = {@ApiResponse(responseCode = "200", description = "삭제 성공"),
+                    @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @DeleteMapping("/{diaryId}")
@@ -85,7 +87,8 @@ public class DiaryController {
     }
 
     @Operation(summary = "일기 조회", description = "유저일 경우 및 해당 날짜에 일기가 있을 경우 일기를 조회",
-            responses = {@ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
+            responses = {@ApiResponse(responseCode = "200", description = "조회 성공"),
+                    @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @GetMapping("/diary")
@@ -107,7 +110,8 @@ public class DiaryController {
 
     }
     @Operation(summary = "사용자의 모든 일기 조회", description = "유저일 경우 유저의 모든 일기 반환",
-            responses = {@ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패"),
+            responses = {@ApiResponse(responseCode = "200", description = "조회 성공"),
+                    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @GetMapping("/user")
     public ResponseEntity<List<Diary>> getUserDiaries(@RequestHeader("Authorization") String token){
@@ -125,7 +129,8 @@ public class DiaryController {
     }
 
     @Operation(summary = "일자별 최상위 감정 조회", description = "유저일 경우 날짜별 최상위 감정 조회",
-            responses = {@ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 생성 실패"),
+            responses = {@ApiResponse(responseCode = "200", description = "조회 성공"),
+                    @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 생성 실패"),
                     @ApiResponse(responseCode = "500", description = "서버 오류")})
     @GetMapping("/diary/top-emotion")
     public ResponseEntity<TopEmotionResponse> getTopEmotionByDate(@RequestHeader("Authorization") String token, @RequestParam String month){
