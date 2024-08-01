@@ -44,13 +44,13 @@ public class UserDTO {
         private String Id;
         @Schema(description = "닉네임", example = "test_username")
         private String userName;
-        @Schema(description = "이메일", example = "test_email")
+        @Schema(description = "이메일", example = "jjjj@naver.com")
         private String email;
         @Schema(description = "휴대폰 번호", example = "010-1234-5678")
         private String phoneNumber;
         @Schema(description = "생년월일", example = "test_birthday")
         private LocalDate birthDate;
-        @Schema(description = "성별", example = "test_gender")
+        @Schema(description = "성별", example = "M")
         private Gender gender;
         @Schema(description = "직업", example = "test_job")
         private String job;

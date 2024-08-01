@@ -2,6 +2,7 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.domain.Gender;
 import com.feelinsight.feelinsight.domain.User;
+import com.feelinsight.feelinsight.exception.DuplicateEmailException;
 import com.feelinsight.feelinsight.exception.DuplicateUserException;
 import com.feelinsight.feelinsight.exception.IdNotFoundException;
 import com.feelinsight.feelinsight.exception.InvalidCredentialException;
@@ -39,6 +40,9 @@ public class UserService {
         User user=userRepository.findById(Id);
         if(user!=null){
             throw new DuplicateUserException("이미 존재하는 사용자입니다.");
+        }
+        if(email!=null){
+            throw new DuplicateEmailException("이미 존재하는 이메일입니다.");
         }
         return userRepository.save(new User(userName, Id, email, password, phoneNumber, birthDate, job, gender));
     }
