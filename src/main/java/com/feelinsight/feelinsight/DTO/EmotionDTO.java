@@ -8,7 +8,7 @@ import lombok.Data;
 public class EmotionDTO {
     @Data
     public static class EmotionResponse{
-        @Schema(description = "감정 아이디", example = "test_emotion_id")
+        @Schema(description = "감정 아이디", example = "6435")
         private Long emotionId;
         @Schema(description = "유저 이름", example = "박지우")
         private String userName;

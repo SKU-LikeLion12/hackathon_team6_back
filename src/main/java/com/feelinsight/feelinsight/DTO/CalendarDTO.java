@@ -12,9 +12,9 @@ import java.util.Map;
 public class CalendarDTO {
     @Data
     public static class ResponseCalendar{
-        @Schema(description = "유저 아이디", example = "test_user_id")
+        @Schema(description = "유저 아이디", example = "1234")
         private Long userId;
-        @Schema(description = "일기 아이디", example = "test_diary_id")
+        @Schema(description = "일기 아이디", example = "12")
         private Long diaryId;
         @Schema(description = "날짜(년월일)", example = "2050-01-01")
         private LocalDate date;

@@ -12,21 +12,21 @@ public class UserDTO {
     @Data
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class UserCreateRequest{
-        @Schema(description = "닉네임", example = "test_username")
+        @Schema(description = "닉네임", example = "박지우")
         private String userName;
-        @Schema(description = "아이디", example = "test_id")
+        @Schema(description = "아이디", example = "joy002208")
         private String id;
-        @Schema(description = "이메일", example = "test_email")
+        @Schema(description = "이메일", example = "joy002208@gmail.com")
         private String email;
-        @Schema(description = "비밀번호", example = "test_password")
+        @Schema(description = "비밀번호", example = "abd123!")
         private String password;
-        @Schema(description = "휴대폰 번호", example = "010-1234-5678")
+        @Schema(description = "휴대폰 번호", example = "010-2122-7619")
         private String phoneNumber;
-        @Schema(description = "생년월일", example = "test_birthday")
+        @Schema(description = "생년월일", example = "2002-02-08")
         private LocalDate birthDate;
-        @Schema(description = "성별", example = "test_gender")
+        @Schema(description = "성별", example = "F")
         private Gender gender;
-        @Schema(description = "직업", example = "test_job")
+        @Schema(description = "직업", example = "학생")
         private String job;
     }
 
@@ -40,19 +40,19 @@ public class UserDTO {
     @AllArgsConstructor
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class UserResponse{
-        @Schema(description = "아이디", example = "test_id")
+        @Schema(description = "아이디", example = "joy002208")
         private String Id;
-        @Schema(description = "닉네임", example = "test_username")
+        @Schema(description = "닉네임", example = "박지우")
         private String userName;
-        @Schema(description = "이메일", example = "jjjj@naver.com")
+        @Schema(description = "이메일", example = "joy002208@gmail.com")
         private String email;
-        @Schema(description = "휴대폰 번호", example = "010-1234-5678")
+        @Schema(description = "휴대폰 번호", example = "010-2122-7619")
         private String phoneNumber;
-        @Schema(description = "생년월일", example = "test_birthday")
+        @Schema(description = "생년월일", example = "2002-02-08")
         private LocalDate birthDate;
-        @Schema(description = "성별", example = "M")
+        @Schema(description = "성별", example = "F")
         private Gender gender;
-        @Schema(description = "직업", example = "test_job")
+        @Schema(description = "직업", example = "학생")
         private String job;
     }
 
