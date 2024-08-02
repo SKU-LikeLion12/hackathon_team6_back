@@ -26,40 +26,32 @@ public class  UserController {
 
     @Operation(summary="회원가입", description = "정보를 입력하고 회원가입 시도",
         responses = {@ApiResponse(responseCode = "201", description = "생성 성공 후 토큰 변환"),
-                    @ApiResponse(responseCode = "409", description = "중복 아이디로 인한 생성 실패"),
-                    @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                    @ApiResponse(responseCode = "409", description = "중복 아이디로 인한 생성 실패")})
     @PostMapping("/user/signup")
     public ResponseEntity<String> signUp(@RequestBody UserCreateRequest request){
         try{
             User user=userService.signUp(request.getUserName(), request.getId(), request.getEmail(), request.getPassword(),
                     request.getPhoneNumber(), request.getBirthDate(), request.getGender(), request.getJob());
-            if (user == null) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 존재하는 사용자입니다.");
-            }
             String token = userService.login(request.getId(), request.getPassword());
             return ResponseEntity.status(HttpStatus.CREATED).body(token);
         }catch(DuplicateUserException e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
         }
     }
 
     @Operation(summary="로그인", description = "아이디와 패스워드를 입력하고 로그인 시도",
             responses = {@ApiResponse(responseCode = "202", description = "로그인 성공"),
-                        @ApiResponse(responseCode = "401", description = "아이디 또는 비밀번호 오류"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                        @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없습니다."),
+                        @ApiResponse(responseCode = "401", description = "아이디 또는 비밀번호 오류")})
     @PostMapping("/user/login")
     public ResponseEntity<String>  login(@RequestBody UserLoginRequest request){
         try {
             String token = userService.login(request.getId(), request.getPassword());
             return ResponseEntity.ok(token);
-        } catch (InvalidCredentialException e) {
+        } catch(IdNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch(InvalidCredentialException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
         }
     }
 
@@ -81,8 +73,7 @@ public class  UserController {
 
     @Operation(summary="사용자 조회", description = "id로 사용자를 조회",
             responses = {@ApiResponse(responseCode = "200", description = "성공"),
-                        @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                        @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")})
     @GetMapping("/user/{id}")
     public ResponseEntity<UserResponse> getUser(@Parameter(description = "사용자 ID", example = "test_id")@PathVariable("id") String id){
         try {
@@ -92,17 +83,13 @@ public class  UserController {
             return ResponseEntity.ok(response);
         } catch (IdNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @Operation(summary="사용자 업데이트", description = "사용자 정보 업데이트",
             responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공"),
                         @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰"),
-                        @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                        @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음")})
     @PutMapping("/user/update")
     public ResponseEntity<UserResponse> updateUser(@RequestHeader("Authorization") String token,@RequestBody UserUpdateRequest request) {
         try {
@@ -117,17 +104,13 @@ public class  UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } catch (IdNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @Operation(summary="사용자 삭제", description = "사용자 삭제",
             responses = {@ApiResponse(responseCode = "200", description = "성공"),
                         @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
-                        @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                        @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰")})
     @DeleteMapping("/user/delete")
     public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String token){
         try {
@@ -138,9 +121,6 @@ public class  UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } catch (IdNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

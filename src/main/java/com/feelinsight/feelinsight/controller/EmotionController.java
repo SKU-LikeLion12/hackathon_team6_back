@@ -20,8 +20,7 @@ public class EmotionController {
 
     @Operation(summary = "감정 조회", description = "emotion_Id로 emotion 조회",
             responses = {@ApiResponse(responseCode = "200", description = "조회 성공"),
-                    @ApiResponse(responseCode = "404", description = "감정을 찾을 수 없음"),
-                    @ApiResponse(responseCode = "500", description = "서버 오류")})
+                    @ApiResponse(responseCode = "404", description = "감정을 찾을 수 없음")})
     @GetMapping("/emotion/{emotionId}")
     public ResponseEntity<EmotionResponse> getEmotion(@Parameter(description = "emotion ID", example = "test_id")@PathVariable("emotionId") Long emotionId){
         try{
@@ -30,30 +29,22 @@ public class EmotionController {
             return ResponseEntity.ok(emotionresponse);
         }catch (EmotionNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }catch(Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @Operation(summary = "감정 수정", description = "emotion을 입력받아 감정 수정",
-            responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공"),
-                    @ApiResponse(responseCode = "500", description = "서버 오류")})
+            responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공")})
     @PostMapping("/emotion/update")
     public ResponseEntity<Void> updateEmotion(@RequestBody EmotionDTO.RequestEmotion request) {
-        try {
-            emotionService.updateEmotion(
-                    request.getUserId(),
-                    request.getHappiness(),
-                    request.getAnxiety(),
-                    request.getNeutral(),
-                    request.getSadness(),
-                    request.getAnger());
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        emotionService.updateEmotion(
+                request.getUserId(),
+                request.getHappiness(),
+                request.getAnxiety(),
+                request.getNeutral(),
+                request.getSadness(),
+                request.getAnger());
+        return ResponseEntity.ok().build();
+
     }
 
 }

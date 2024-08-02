@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,13 +67,16 @@ public class PostService {
         }
     }
 
-    public List<Post> getRecommendation(Long userId){
-        Emotion emotion= emotionRepository.findByUserIdEmotion(userId);
-        if(emotion !=null){
-            String topEmotion= emotion.getTopEmotion();
-            return postRepository.findByEmotionType(topEmotion);
-        }else{
-            return List.of();
+    public List<Post> getRecommendation(Long userId) {
+        Emotion emotion = emotionRepository.findByUserIdEmotion(userId);
+        if (emotion != null) {
+            String topEmotion = emotion.getTopEmotion();
+            List<Post> posts = postRepository.findByEmotionType(topEmotion);
+            if (!posts.isEmpty()) {
+                Collections.shuffle(posts);
+                return posts.stream().limit(3).collect(Collectors.toList());
+            }
         }
+        return Collections.emptyList();
     }
 }

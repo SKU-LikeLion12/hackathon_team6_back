@@ -26,25 +26,19 @@ public class ChatController {
     private final EmotionService emotionService;
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
-            responses = {@ApiResponse(responseCode = "200", description = "성공"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+            responses = {@ApiResponse(responseCode = "200", description = "성공")})
     @PostMapping("/api/chat")
     public ResponseEntity<String> receiveChatData(@RequestBody ChatDTO.ChatTransfer chatTransfer) {
-        try{
-            situationService.processSituationData(chatTransfer);
-            chatService.processChatData(chatTransfer);
-            emotionService.processEmotionData(chatTransfer);
-            return new ResponseEntity<>("대화 데이터가 성공적으로 처리되어 저장되었습니다.", HttpStatus.OK);
-        }catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>("대화데이터를 처리하는 중 오류가 발생했습니다.",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        situationService.processSituationData(chatTransfer);
+        chatService.processChatData(chatTransfer);
+        emotionService.processEmotionData(chatTransfer);
+        return new ResponseEntity<>("대화 데이터가 성공적으로 처리되어 저장되었습니다.", HttpStatus.OK);
+
     }
 
     @Operation(summary = "대화내용 찾기", description = "경로의 chat의 Id로 chat의 정보 찾기",
             responses = {@ApiResponse(responseCode = "200", description = "성공"),
-                        @ApiResponse(responseCode = "404", description = "대화데이터 를 찾을 수 없음"),
-                        @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                        @ApiResponse(responseCode = "404", description = "대화데이터 를 찾을 수 없음")})
     @GetMapping("/chat/{chatId}")
     public ResponseEntity<ChatResponse> getChat(@Parameter(description = "chat ID", example = "test_id") @PathVariable("chatId") Long chatId) {
         try {
@@ -53,9 +47,6 @@ public class ChatController {
             return ResponseEntity.ok(chatResponse);
         } catch (ChatNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
