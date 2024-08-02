@@ -30,7 +30,7 @@ public class  UserController {
     @PostMapping("/user/signup")
     public ResponseEntity<String> signUp(@RequestBody UserCreateRequest request){
         try{
-            User user=userService.signUp(request.getUserName(), request.getId(), request.getEmail(), request.getPassword(),
+            User user = userService.signUp(request.getUserName(), request.getId(), request.getEmail(), request.getPassword(),
                     request.getPhoneNumber(), request.getBirthDate(), request.getGender(), request.getJob());
             String token = userService.login(request.getId(), request.getPassword());
             return ResponseEntity.status(HttpStatus.CREATED).body(token);
