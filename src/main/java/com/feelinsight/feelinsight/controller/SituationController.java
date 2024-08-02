@@ -22,8 +22,7 @@ public class SituationController {
 
     @Operation(summary = "감정 상황 조회", description = "경로의 situation_id로 감정 상황 조회",
             responses = {@ApiResponse(responseCode = "201", description = "성공"),
-                    @ApiResponse(responseCode = "404", description = "상황데이터를 찾을 수 없음"),
-                    @ApiResponse(responseCode = "500", description = "서버 오류 발생")})
+                    @ApiResponse(responseCode = "404", description = "상황데이터를 찾을 수 없음")})
     @GetMapping("/situation/{situationId}")
     public ResponseEntity<SituationResponse> getSituation(@Parameter(description = "situation ID", example = "test_id") @PathVariable("situationId") Long situationId) {
         try {
@@ -32,9 +31,6 @@ public class SituationController {
             return ResponseEntity.ok(situationResponse);
         } catch (SituationNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

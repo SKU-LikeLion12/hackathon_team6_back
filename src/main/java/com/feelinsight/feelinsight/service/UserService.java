@@ -37,7 +37,11 @@ public class UserService {
     @Transactional
     public User signUp(String userName, String Id, String email, String password, String phoneNumber, LocalDate birthDate, Gender gender, String job){
         User user=userRepository.findById(Id);
+        User user2=userRepository.findByEmail(email);
         if(user!=null){
+            throw new DuplicateUserException("이미 존재하는 사용자입니다.");
+        }
+        if(user2!=null){
             throw new DuplicateUserException("이미 존재하는 사용자입니다.");
         }
         return userRepository.save(new User(userName, Id, email, password, phoneNumber, birthDate, job, gender));
