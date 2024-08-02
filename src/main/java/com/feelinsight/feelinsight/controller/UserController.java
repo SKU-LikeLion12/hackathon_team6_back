@@ -44,14 +44,15 @@ public class  UserController {
                         @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없습니다."),
                         @ApiResponse(responseCode = "401", description = "아이디 또는 비밀번호 오류")})
     @PostMapping("/user/login")
-    public ResponseEntity<String>  login(@RequestBody UserLoginRequest request){
+    public ResponseEntity<loginResponse>  login(@RequestBody UserLoginRequest request){
         try {
             String token = userService.login(request.getId(), request.getPassword());
-            return ResponseEntity.ok(token);
+            String username=userService.tokenToUser(token).getUserName();
+            return ResponseEntity.ok(new loginResponse(token, username));
         } catch(IdNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch(InvalidCredentialException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 

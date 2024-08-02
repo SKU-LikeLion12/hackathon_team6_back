@@ -35,7 +35,16 @@ public class UserDTO {
         private String Id;
         private String password;
     }
+    @Data
+    public static class loginResponse{
+        private String token;
+        private String username;
 
+        public loginResponse(String token, String username){
+            this.token=token;
+            this.username=username;
+        }
+    }
     @Data
     @AllArgsConstructor
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
