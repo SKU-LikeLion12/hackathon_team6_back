@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmotionService {
     private final EmotionRepository emotionRepository;
 
+    @Transactional
     public void processEmotionData(ChatDTO.ChatTransfer chatTransfer) {
         try{
             Emotion emotion = convertToEmotion(chatTransfer);
@@ -23,9 +24,7 @@ public class EmotionService {
         }catch(Exception e){
             throw new RuntimeException("감정 데이터를 처리하는 중 오류가 발생했습니다.",e);
         }
-
     }
-
     private Emotion convertToEmotion(ChatDTO.ChatTransfer chatTransfer) {
         Emotion entity = new Emotion();
         Map<String, Integer> emotions = chatTransfer.getEmotions();
@@ -54,9 +53,4 @@ public class EmotionService {
         }
         return emotion;
     }
-
-//    public Emotion getEmotionByChatId(Long chatId) {
-//        return emotionRepository.findByChatId(chatId)
-//                .orElseThrow(() -> new EntityNotFoundException("Emotion not found for chat id: " + chatId));
-//    }
 }

@@ -2,6 +2,7 @@ package com.feelinsight.feelinsight.service;
 
 import com.feelinsight.feelinsight.domain.Gender;
 import com.feelinsight.feelinsight.domain.User;
+import com.feelinsight.feelinsight.exception.DuplicateEmailException;
 import com.feelinsight.feelinsight.exception.DuplicateUserException;
 import com.feelinsight.feelinsight.exception.IdNotFoundException;
 import com.feelinsight.feelinsight.exception.InvalidCredentialException;

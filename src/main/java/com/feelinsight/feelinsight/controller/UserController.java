@@ -40,7 +40,7 @@ public class  UserController {
     }
 
     @Operation(summary="로그인", description = "아이디와 패스워드를 입력하고 로그인 시도",
-            responses = {@ApiResponse(responseCode = "202", description = "로그인 성공"),
+            responses = {@ApiResponse(responseCode = "200", description = "로그인 성공"),
                         @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없습니다."),
                         @ApiResponse(responseCode = "401", description = "아이디 또는 비밀번호 오류")})
     @PostMapping("/user/login")
@@ -109,7 +109,7 @@ public class  UserController {
     }
 
     @Operation(summary="사용자 삭제", description = "사용자 삭제",
-            responses = {@ApiResponse(responseCode = "200", description = "성공"),
+            responses = {@ApiResponse(responseCode = "204", description = "성공"),
                         @ApiResponse(responseCode = "404", description = "사용자를 찾을 수 없음"),
                         @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰")})
     @DeleteMapping("/user/delete")
