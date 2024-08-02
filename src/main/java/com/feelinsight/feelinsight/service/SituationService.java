@@ -43,11 +43,4 @@ public class SituationService {
         }
         return situation;
     }
-
-
-//    public Situation getSituationByChatId(Long chatId) {
-//        return situationRepository.findByChatId(chatId)
-//                .orElseThrow(() -> new EntityNotFoundException("Situation not found for chat id: " + chatId));
-//    }
-
 }

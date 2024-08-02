@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @Operation(summary = "추천 프로그램 삭제", description = "경로의 post_id를 받아 프로그램 식제",
-            responses = {@ApiResponse(responseCode = "200", description = "삭제 성공"),
+            responses = {@ApiResponse(responseCode = "204", description = "삭제 성공"),
                         @ApiResponse(responseCode = "404", description = "프로그램을 찾을 수 없음")})
     @DeleteMapping("/post/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
