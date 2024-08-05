@@ -29,29 +29,29 @@ public class ChatController {
     private JwtUtility jwtUtility;
     private final DiaryService diaryService;
 
-//    @Value("${django.server.url}")
-//    private String djangoServerUrl;
+    @Value("${django.server.url}")
+    private String djangoServerUrl;
 
-//    @PostMapping("/upload-audio")
-//    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, MultipartFile file){
-//
-//        Claims claims;
-//        try {
-//            claims = jwtUtility.validateToken(token);
-//        } catch (IllegalArgumentException e) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
-//        }
-//
-//        String userId=claims.getSubject();
-//
-//        try {
-//            chatService.sendFiletoDjangoServer(file);
-//        } catch (IOException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
-//        }
-//
-//        return ResponseEntity.ok("File uploaded successfully");
-//    }
+    @PostMapping("/upload-audio")
+    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, MultipartFile file){
+
+        Claims claims;
+        try {
+            claims = jwtUtility.validateToken(token);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+        }
+
+        String userId=claims.getSubject();
+
+        try {
+            chatService.sendFiletoDjangoServer(file, userId);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
+        }
+
+        return ResponseEntity.ok("File uploaded successfully");
+    }
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
             responses = {@ApiResponse(responseCode = "200", description = "성공")})

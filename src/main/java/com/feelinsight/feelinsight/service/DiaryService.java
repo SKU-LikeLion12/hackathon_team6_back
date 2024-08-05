@@ -48,15 +48,16 @@ public class DiaryService {
     }
 
     @Transactional
-    public void deleteDiary(Long diaryId, String token){
-        Diary diary = diaryRepository.findByDiaryId(diaryId);
+    public void deleteDiary(LocalDate date, String token){
+        User user=userService.tokenToUser(token);
+        Diary diary = diaryRepository.findByuserIdAndDate(user.getUserId(), date);
         if(diary==null){
             throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
-        User user=userService.tokenToUser(token);
         if(user==diary.getUser()){
             diaryRepository.deleteDiary(diary);
         }
+
     }
 
     public Diary findByUserIdAndDate(String id, LocalDate date){

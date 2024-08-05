@@ -63,10 +63,10 @@ public class DiaryController {
             responses = {@ApiResponse(responseCode = "200", description = "삭제 성공"),
                     @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패")})
-    @DeleteMapping("/{diaryId}")
-    public ResponseEntity<Void> deleteDiary(@RequestHeader("Authorization") String token, @PathVariable Long diaryId){
+    @DeleteMapping("/diary/delete")
+    public ResponseEntity<Void> deleteDiary(@RequestHeader("Authorization") String token, @RequestParam LocalDate date){
         try {
-            diaryService.deleteDiary(diaryId, token);
+            diaryService.deleteDiary(date, token);
             return ResponseEntity.noContent().build();
         } catch (InvalidTokenException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
