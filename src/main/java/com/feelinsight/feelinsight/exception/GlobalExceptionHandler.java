@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleExpiredJwtException(Exception e){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
+
     @ExceptionHandler(InvalidCredentialException.class)
     public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialException e){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
@@ -68,6 +69,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 }

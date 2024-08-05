@@ -19,9 +19,9 @@ public class ChatDTO {
         private LocalDateTime startTime;
         @Schema(description = "일기 작성 끝난 시간", example = "2050-01-01T00:05:00.3")
         private LocalDateTime endTime;
-        @Schema(description = "감정", example = "{happiness:10, anxiety:10, neutral:20, sadness:30, anger:30}")
+        @Schema(description = "감정", example = "{'happiness':10, 'anxiety':10, 'neutral':20, 'sadness':30, 'anger':30}")
         private Map<String, Integer> emotions;
-        @Schema(description = "감정 상황", example = "{happiness:'초콜릿 먹을 때', anxiety:'혼날 때', sadness:'혼자 있을 떄', anger:'부당할 때'}")
+        @Schema(description = "감정 상황", example = "{'happinessAt':'초콜릿 먹을 때', 'anxietyAt':'혼날 때', 'sadnessAt':'혼자 있을 떄', 'angerAt':'부당할 때'}")
         private Map<String, String> situation;
     }
 
