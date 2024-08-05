@@ -4,26 +4,54 @@ import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
 import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.exception.ChatNotFoundException;
-import com.feelinsight.feelinsight.service.ChatService;
-import com.feelinsight.feelinsight.service.EmotionService;
-import com.feelinsight.feelinsight.service.SituationService;
+import com.feelinsight.feelinsight.exception.InvalidTokenException;
+import com.feelinsight.feelinsight.service.*;
+import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 public class ChatController {
     private final ChatService chatService;
     private final SituationService situationService;
     private final EmotionService emotionService;
+    private JwtUtility jwtUtility;
+    private final DiaryService diaryService;
+
+//    @Value("${django.server.url}")
+//    private String djangoServerUrl;
+
+//    @PostMapping("/upload-audio")
+//    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, MultipartFile file){
+//
+//        Claims claims;
+//        try {
+//            claims = jwtUtility.validateToken(token);
+//        } catch (IllegalArgumentException e) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+//        }
+//
+//        String userId=claims.getSubject();
+//
+//        try {
+//            chatService.sendFiletoDjangoServer(file);
+//        } catch (IOException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
+//        }
+//
+//        return ResponseEntity.ok("File uploaded successfully");
+//    }
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
             responses = {@ApiResponse(responseCode = "200", description = "성공")})

@@ -35,6 +35,7 @@ public class DiaryRepository implements DiaryRepositoryIN{
     @Override
     public Diary findByuserIdAndDate(Long userId, LocalDate date){
         User user= userRepository.findByUserId(userId);
+
         return em.createQuery("select d from Diary d where d.user=:u and d.date=:date", Diary.class)
                 .setParameter("u",user)
                 .setParameter("date",date)

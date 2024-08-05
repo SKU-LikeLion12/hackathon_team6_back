@@ -32,6 +32,8 @@ public class Diary {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Chat chat;
 
+    private String content;
+
     private LocalDate date;
 
     private LocalDateTime createAt;
@@ -41,6 +43,7 @@ public class Diary {
     public Diary(User user, LocalDate date, Emotion emotion, Chat chat){
         this.user=user;
         this.date=date;
+        this.content=chat.getMessage();
         this.emotion=emotion;
         this.chat=chat;
         this.createAt=LocalDateTime.now();

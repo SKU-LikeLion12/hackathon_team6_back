@@ -5,14 +5,21 @@ import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.exception.ChatNotFoundException;
 import com.feelinsight.feelinsight.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ChatService {
     private final ChatRepository chatRepository;
+    @Value("${django.server.url}")
+    private String djangoServerUrl;
 
     @Transactional
     public void processChatData(ChatDTO.ChatTransfer chatTransfer) {
@@ -41,4 +48,12 @@ public class ChatService {
         }
         return chat;
     }
+
+//    public void sendFiletoDjangoServer(MultipartFile file) throws IOException{
+//        WebClient webClient=WebClient.builder()
+//                .baseUrl(djangoServerUrl)
+//                .build();
+//
+//        Multi
+//    }
 }

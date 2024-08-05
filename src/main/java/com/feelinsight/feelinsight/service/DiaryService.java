@@ -28,14 +28,15 @@ public class DiaryService {
     @Transactional
     public Diary saveDiary(String id, Chat chat, LocalDate date, Emotion emotion){
         User user =userService.findById(id);
-        Diary diary=new Diary(user,date,emotion,chat);
+        Diary diary=new Diary(user, date, emotion, chat);
         diaryRepository.saveDiary(diary);
         return diary;
     }
 
     @Transactional
-    public Diary updateDiary(Long diaryId, String content, String token ){
-        Diary diary=diaryRepository.findByDiaryId(diaryId);
+    public Diary updateDiary(String content, String token, LocalDate date){
+        String userId=userService.tokenToUser(token).getId();
+        Diary diary=findByUserIdAndDate(userId, date);
         if(diary==null){
             throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
@@ -66,6 +67,7 @@ public class DiaryService {
         }
         return diary;
     }
+
     public Diary findDiary(Long diaryId){
         Diary diary=diaryRepository.findByDiaryId(diaryId);
         if(diary==null){

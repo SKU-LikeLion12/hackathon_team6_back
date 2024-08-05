@@ -13,6 +13,8 @@ public class DiaryDTO {
     @Data
     @AllArgsConstructor
     public static class ResponseDiary{
+        @Schema(description = "일기 아이디", example ="1")
+        private Long diaryId;
         @Schema(description = "날짜", example = "2050-01-01")
         private LocalDate date;
         @Schema(description = "일기 내용", example = "오늘의 일기는 다음과 같아 어쩌구...")
@@ -23,8 +25,9 @@ public class DiaryDTO {
         private Emotion emotion;
 
         public ResponseDiary(Diary diary){
+            this.diaryId=diary.getDiaryId();
             this.date=diary.getDate();
-            this.content=diary.getChatMessage();
+            this.content=diary.getContent();
             this.userName=diary.getUser().getUserName();
             this.emotion= diary.getEmotion();
         }
@@ -33,7 +36,6 @@ public class DiaryDTO {
 
     @Data
     public static class RequestDiary{
-        private String token;
         private String content;
         private LocalDate date;
         private Emotion emotion;

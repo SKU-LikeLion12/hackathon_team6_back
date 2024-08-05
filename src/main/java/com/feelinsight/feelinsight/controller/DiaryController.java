@@ -46,10 +46,11 @@ public class DiaryController {
             responses = {@ApiResponse(responseCode = "200", description = "업데이트 성공"),
                     @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패")})
-    @PutMapping("/{diaryId}")
-    public ResponseEntity<ResponseDiary> updateDiary(@RequestHeader("Authorization") String token, @PathVariable Long diaryId, @RequestBody RequestDiary requestDiary){
+    @PutMapping("/diary")
+    public ResponseEntity<ResponseDiary> updateDiary(@RequestHeader("Authorization") String token, @RequestBody RequestDiary requestDiary){
         try {
-            Diary diary = diaryService.updateDiary(diaryId, requestDiary.getContent(), token);
+            String userToken = jwtUtility.bearerToken(token);
+            Diary diary = diaryService.updateDiary(requestDiary.getContent(), userToken, requestDiary.getDate());
             return ResponseEntity.ok(new ResponseDiary(diary));
         } catch (InvalidTokenException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -79,13 +80,14 @@ public class DiaryController {
                     @ApiResponse(responseCode = "404", description = "다이어리를 찾을 수 없음"),
                     @ApiResponse(responseCode = "401", description = "유효하지 않은 토큰으로 인한 생성 실패")})
     @GetMapping("/diary")
-    public ResponseEntity<ResponseCalendar> getDiaryByDate(@RequestHeader("Authorization") String token, @RequestParam String date){
+    public ResponseEntity<Diary> getDiaryByDate(@RequestHeader("Authorization") String token, @RequestParam String date){
         try {
             String userToken = jwtUtility.bearerToken(token);
             String userId = userService.tokenToUser(userToken).getId();
             LocalDate localDate = LocalDate.parse(date);
+
             Diary diary = diaryService.findByUserIdAndDate(userId, localDate);
-            return ResponseEntity.ok(new ResponseCalendar(diary));
+            return ResponseEntity.ok(diary);
         } catch (InvalidTokenException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } catch (DiaryNotFoundException e) {

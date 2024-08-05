@@ -2,9 +2,14 @@ package com.feelinsight.feelinsight.service;
 
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
+import com.feelinsight.feelinsight.domain.Diary;
 import com.feelinsight.feelinsight.domain.Emotion;
+import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.exception.EmotionNotFoundException;
+import com.feelinsight.feelinsight.exception.IdNotFoundException;
 import com.feelinsight.feelinsight.repository.EmotionRepository;
+
+import java.time.LocalDate;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class EmotionService {
     private final EmotionRepository emotionRepository;
+    private final UserService userService;
+    private final DiaryService diaryService;
 
     @Transactional
     public void processEmotionData(ChatDTO.ChatTransfer chatTransfer) {
@@ -46,11 +53,35 @@ public class EmotionService {
         }
 
     }
+
     public Emotion findByEmotionId(Long emotionId){
         Emotion emotion = emotionRepository.findByEmotionId(emotionId);
         if(emotion==null){
             throw new EmotionNotFoundException("해당 ID의 감정데이터를 찾을 수 없습니다.");
         }
         return emotion;
+    }
+
+    public Emotion findByUserAndDate(long userId, LocalDate date){
+        User user=userService.findByUserId(userId);
+        if(user==null){
+            throw new IdNotFoundException("해당 유저를 찾을 수 없습니다.");
+        }
+        Diary diary=diaryService.findByUserIdAndDate(user.getId(), date);
+        if(date==diary.getDate()){
+            Emotion emotion=diary.getEmotion();
+            return emotion;
+        }
+        else{
+            throw new EmotionNotFoundException("해당 감정을 찾을 수 없습니다.");
+        }
+    }
+
+    public Emotion findByUserEmotion(long userId){
+        User user=userService.findByUserId(userId);
+        if(user==null){
+            throw new IdNotFoundException("해당 유저를 찾을 수 없습니다.");
+        }
+        return emotionRepository.findByUserIdEmotion(userId);
     }
 }
