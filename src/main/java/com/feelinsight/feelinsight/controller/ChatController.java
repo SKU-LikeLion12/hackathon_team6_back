@@ -33,7 +33,7 @@ public class ChatController {
     private String djangoServerUrl;
 
     @PostMapping("/upload-audio")
-    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, MultipartFile file){
+    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, @RequestParam MultipartFile file){
 
         Claims claims;
         try {

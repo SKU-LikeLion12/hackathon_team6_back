@@ -41,7 +41,7 @@ public class DiaryService {
             throw new DiaryNotFoundException("일기를 찾을 수 없습니다.");
         }
         User user= userService.tokenToUser(token);
-        if(user==diary.getUser()){
+        if(user.equals(diary.getUser())){
             diary.updateDiary(content);
         }
         return diary;

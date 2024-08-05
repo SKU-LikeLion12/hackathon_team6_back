@@ -40,4 +40,9 @@ public class DiaryDTO {
         private LocalDate date;
         private Emotion emotion;
     }
+
+    @Data
+    public static class RequestUpdate {
+        private String content;
+    }
 }
