@@ -43,4 +43,12 @@ public class SituationService {
         }
         return situation;
     }
+
+    public Situation findSituationByUser(Long userId){
+        Situation situation=situationRepository.findSituationByUser(userId);
+        if(situation==null){
+            throw new SituationNotFoundException("상황데이터를 찾을 수 없습니다.");
+        }
+        return situation;
+    }
 }
