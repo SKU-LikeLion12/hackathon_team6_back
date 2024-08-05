@@ -6,7 +6,9 @@ import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.exception.ChatNotFoundException;
 import com.feelinsight.feelinsight.repository.ChatRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,7 +75,7 @@ public class ChatService {
         body.add("file", byteArrayResource);
         body.add("userId", userId);
 
-        webClient.post()
+        String response= webClient.post()
                 .uri("/upload/")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .bodyValue(body)
@@ -85,7 +87,21 @@ public class ChatService {
                 .bodyToMono(String.class)
                 .block();
 
+        ObjectMapper mapper = new ObjectMapper();
+        ProcessedData processedData = mapper.readValue(response, ProcessedData.class);
 
+        User user = new User(); // 필요에 따라 User 객체를 조회해야 할 수 있음
+        user.setId(userId); // User 객체를 적절히 설정하세요
+
+        Chat chat = new Chat(user, processedData.getMessage());
+        chatRepository.saveNewChat(chat);
+
+    }
+    @Getter @Setter
+    private static class ProcessedData{
+        private String userId;
+        private int fileLength;
+        private String message;
     }
 
 }
