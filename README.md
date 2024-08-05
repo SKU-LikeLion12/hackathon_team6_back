@@ -10,7 +10,7 @@
 <br />
 박지우 : https://github.com/parkjiu0208
 <br />
-권오현 : 
+권오현 : https://github.com/GOH01
 
 ### 프로젝트 설명
 > 💗 
