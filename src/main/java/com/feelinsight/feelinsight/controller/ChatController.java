@@ -26,23 +26,23 @@ public class ChatController {
     private final ChatService chatService;
     private final SituationService situationService;
     private final EmotionService emotionService;
-    private JwtUtility jwtUtility;
+
+    private final JwtUtility jwtUtility;
     private final DiaryService diaryService;
 
-    @Value("${django.server.url}")
-    private String djangoServerUrl;
-
     @PostMapping("/upload-audio")
-    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization")String token, @RequestParam MultipartFile file){
+    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization") String token,
+                                                   @RequestParam("file") MultipartFile file) {
 
         Claims claims;
+
         try {
             claims = jwtUtility.validateToken(token);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
         }
 
-        String userId=claims.getSubject();
+        String userId = claims.getSubject();
 
         try {
             chatService.sendFiletoDjangoServer(file, userId);

@@ -61,6 +61,8 @@ public class ChatService {
     }
 
     public void sendFiletoDjangoServer(MultipartFile file, String userId) throws IOException{
+//        long fileSize = file.getSize();
+//        System.out.println("파일 크기: " + fileSize + " 바이트");
         WebClient webClient=WebClient.builder()
                 .baseUrl(djangoServerUrl)
                 .build();
@@ -75,8 +77,9 @@ public class ChatService {
         body.add("file", byteArrayResource);
         body.add("userId", userId);
 
+
         String response= webClient.post()
-                .uri("/upload/")
+                .uri("/transcribe/")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .bodyValue(body)
                 .retrieve()
