@@ -4,6 +4,7 @@ import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
 import com.feelinsight.feelinsight.DTO.FilleDTO;
 import com.feelinsight.feelinsight.domain.Chat;
+import com.feelinsight.feelinsight.domain.User;
 import com.feelinsight.feelinsight.exception.ChatNotFoundException;
 import com.feelinsight.feelinsight.exception.InvalidTokenException;
 import com.feelinsight.feelinsight.service.*;
@@ -27,40 +28,43 @@ public class ChatController {
     private final ChatService chatService;
     private final SituationService situationService;
     private final EmotionService emotionService;
+    private final UserService userService;
 
     private final JwtUtility jwtUtility;
     private final DiaryService diaryService;
 
-    @PostMapping("/upload-audio")
-    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization") String token, FilleDTO.RequestFile file) {
-
-        Claims claims;
-
-        try {
-            claims = jwtUtility.validateToken(token);
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
-        }
-
-
-        try {
-            // MultipartFile을 바이트 배열로 변환
-            byte[] fileBytes = file.getFile().getBytes();
-            chatService.sendFiletoDjangoServer(fileBytes);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
-        }
-
-        return ResponseEntity.ok("File uploaded successfully");
-    }
+//    @PostMapping("/upload-audio")
+//    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization") String token, FilleDTO.RequestFile file) {
+//
+//        Claims claims;
+//
+//        try {
+//            claims = jwtUtility.validateToken(token);
+//        } catch (IllegalArgumentException e) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
+//        }
+//
+//        User user=claims.getSubject();
+//        try {
+//            // MultipartFile을 바이트 배열로 변환
+//            byte[] fileBytes = file.getFile().getBytes();
+//            chatService.sendFileToDjangoServer(fileBytes, user.getUserId());
+//        } catch (IOException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
+//        }
+//
+//        return ResponseEntity.ok("File uploaded successfully");
+//    }
 
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
             responses = {@ApiResponse(responseCode = "200", description = "성공")})
     @PostMapping("/api/chat")
     public ResponseEntity<String> receiveChatData(@RequestBody ChatDTO.ChatTransfer chatTransfer) {
+        Claims claims = jwtUtility.validateToken(chatTransfer.getToken());
+        String userId= claims.getSubject();
         situationService.processSituationData(chatTransfer);
-        chatService.processChatData(chatTransfer);
+        chatService.processChatData(chatTransfer, userId);
         emotionService.processEmotionData(chatTransfer);
         return new ResponseEntity<>("대화 데이터가 성공적으로 처리되어 저장되었습니다.", HttpStatus.OK);
 
