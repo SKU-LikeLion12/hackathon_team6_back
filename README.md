@@ -1,27 +1,27 @@
 # Fellinsight✨
+### 프로젝트 설명
+> 💗 음성인식 챗봇을 활용한 일기 기록 및 감정 기록, 더 나아가 행복, 슬픔, 분노, 불안을 느끼는 상황까지 분석해주는 서비스. 좋지 않은 감정을 극복하는데 도움을 주는 서비스
+<br /> 
 
 ### 팀원 소개
 
-이승은 : 
-<br />
+#### ‣ 프론트엔드
 이호연 : https://github.com/dlghdus9949
 <br /> 
 안하서 : https://github.com/haaseoo
 <br />
+#### ‣ 백엔드
 박지우 : https://github.com/parkjiu0208
 <br />
 권오현 : https://github.com/GOH01
 <br />
+#### ‣ 기획 디자인
+이승은 
 <br />
 <br />
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c2e4f82c-8f15-4e09-9427-c05552cafc44">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/c2e4f82c-8f15-4e09-9427-c05552cafc44">
 <br />
 <br />
-
-
-
-### 프로젝트 설명
-> 💗 음성인식 챗봇을 활용한 일기 기록 및 감정 기록, 더 나아가 행복, 슬픔, 분노, 불안을 느끼는 상황까지 분석해주는 서비스. 좋지 않은 감정을 극복하는데 도움을 주는 서비스
 
 # 목차
 
@@ -39,7 +39,6 @@
   * [일기 수정 페이지](#일기-수정-페이지)
   * [달력 페이지](#달력-페이지)
   * [일기 상세 페이지](#일기-상세-페이지)
-  * [개인 페이지](#개인-분석-페이지)
 
 
 # 프로젝트 정보
@@ -78,33 +77,29 @@
 # 프로젝트 결과물
 ## 메인페이지
 #### 메인페이지는 서비스 설명과 소개로 이루어져 있어요.
-<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/b96a4a38-99d6-46a5-b06d-ed554fc02cb5">
+<img width="800" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/b96a4a38-99d6-46a5-b06d-ed554fc02cb5">
 
 
-## 챗봇 상담하기 페이지
-#### 여기는 수정해줘여
+## 챗봇 상담 & 일기 작성 페이지
+#### 챗봇에 나의 감정을 기록하며 일기를 작성할 수 있어요. 
 
 
 ## EQ 높이기 페이지
 #### 기록된 일기들로 감정을 파악하고, 감정에 따른 추천 활동을 보여줍니다.
-<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/529eff8b-6f4f-43a6-be61-5ca8cf7b08c7">
-
-
-## 일기 작성 페이지
-#### 일기 작성 페이지는 챗봇과 대화하며 일기를 작성해보세요.
+<img width="800" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/529eff8b-6f4f-43a6-be61-5ca8cf7b08c7">
 
 
 ## 달력 페이지
 #### 달력 페이지는 작성한 일기들을 확인할 수 있어요.
-<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/e24d6816-282c-4dcb-b5e6-1a5ce1a42116">
+<img width="800" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/e24d6816-282c-4dcb-b5e6-1a5ce1a42116">
 
 
 
 ## 일기 상세 페이지
-#### 일기 상세 페이지에서는 작성한 일기를 토대로 다중 감정 분석을 통해 작성자의 감정을 분석합니다. 이후 분석한 감정데이터를 게이지 바로 제공합니다. 또한 완성된 일기장을 이미지로 저장할 수 있습니다.
+#### 일기 상세 페이지에서는 작성한 일기를 토대로 다중 감정 분석을 통해 작성자의 감정을 분석합니다.
 
 
 ## 일기 수정 페이지
 #### 일기 수정 페이지에서는 대화 종료 후 STT 데이터를 불러와 내용을 수정할 수 있어요.
 #### 수정된 텍스트는 빨간 강조 글씨로 쉽게 확인할 수 있어요.
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/1dadbd0c-1a84-4d5f-8d5c-67d2db669c52">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/1dadbd0c-1a84-4d5f-8d5c-67d2db669c52">
