@@ -51,7 +51,7 @@ public class Diary {
     }
 
     public void updateDiary(String content){
-        this.chat.setMessage(content);
+        this.content=content;
         this.updateAt=LocalDateTime.now();
     }
 

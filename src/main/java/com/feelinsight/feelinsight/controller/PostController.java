@@ -4,6 +4,7 @@ import com.feelinsight.feelinsight.DTO.PostDTO.*;
 import com.feelinsight.feelinsight.domain.Post;
 import com.feelinsight.feelinsight.exception.PostNotFoundException;
 import com.feelinsight.feelinsight.service.PostService;
+import com.feelinsight.feelinsight.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+    private final UserService userService;
 
     @Operation(summary = "추천 프로그램 저장", description = "프로그램 제목, 내용, 감정 타입을 받아 저장",
             responses = {@ApiResponse(responseCode = "201", description = "생성 성공 후 추천 프로그램 변환")})
@@ -80,8 +82,9 @@ public class PostController {
 
     @Operation(summary = "개인 추천 프로그램 조회", description = "경로의 user_id를 받아 개인 맞춤 프로그램을 조회한다.",
             responses = {@ApiResponse(responseCode = "200", description = "조회 성공")})
-    @GetMapping("/post/{userId}")
-    public ResponseEntity<List<Post>> getRecommendation(@PathVariable Long userId) {
+    @GetMapping("/post")
+    public ResponseEntity<List<Post>> getRecommendation(@RequestHeader String token) {
+        Long userId=userService.tokenToUser(token).getUserId();
         List<Post> recommendations = postService.getRecommendation(userId);
         return ResponseEntity.ok(recommendations);
 
