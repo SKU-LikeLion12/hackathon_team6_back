@@ -11,6 +11,11 @@
 박지우 : https://github.com/parkjiu0208
 <br />
 권오현 : https://github.com/GOH01
+<br />
+<br />
+<br />
+![KakaoTalk_Photo_2024-08-06-22-00-44 002](https://github.com/user-attachments/assets/c2e4f82c-8f15-4e09-9427-c05552cafc44)
+
 
 ### 프로젝트 설명
 > 💗 음성인식 챗봇을 활용한 일기 기록 및 감정 기록, 더 나아가 행복, 슬픔, 분노, 불안을 느끼는 상황까지 분석해주는 서비스. 좋지 않은 감정을 극복하는데 도움을 주는 서비스
@@ -88,6 +93,8 @@
 
 ## 달력 페이지
 #### 달력 페이지는 작성한 일기들을 확인할 수 있어요. 해당 날짜의 최상위 감정에 따른 색상을 띄웁니다. 
+<img width="1440" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/e24d6816-282c-4dcb-b5e6-1a5ce1a42116">
+
 
 
 ## 일기 상세 페이지
