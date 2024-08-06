@@ -14,7 +14,7 @@
 <br />
 <br />
 <br />
-![KakaoTalk_Photo_2024-08-06-22-00-44 002](https://github.com/user-attachments/assets/c2e4f82c-8f15-4e09-9427-c05552cafc44)
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c2e4f82c-8f15-4e09-9427-c05552cafc44">
 <br />
 <br />
 
@@ -78,7 +78,7 @@
 # 프로젝트 결과물
 ## 메인페이지
 #### 메인페이지는 서비스 설명과 소개로 이루어져 있어요.
-![KakaoTalk_Photo_2024-08-06-22-00-44 003](https://github.com/user-attachments/assets/b96a4a38-99d6-46a5-b06d-ed554fc02cb5)
+<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/b96a4a38-99d6-46a5-b06d-ed554fc02cb5">
 
 
 ## 챗봇 상담하기 페이지
@@ -87,7 +87,7 @@
 
 ## EQ 높이기 페이지
 #### 기록된 일기들로 감정을 파악하고, 감정에 따른 추천 활동을 보여줍니다.
-![KakaoTalk_Photo_2024-08-06-22-00-43 001](https://github.com/user-attachments/assets/529eff8b-6f4f-43a6-be61-5ca8cf7b08c7)
+<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/529eff8b-6f4f-43a6-be61-5ca8cf7b08c7">
 
 
 ## 일기 작성 페이지
@@ -95,8 +95,8 @@
 
 
 ## 달력 페이지
-#### 달력 페이지는 작성한 일기들을 확인할 수 있어요. 해당 날짜의 최상위 감정에 따른 색상을 띄웁니다. 
-<img width="1440" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/e24d6816-282c-4dcb-b5e6-1a5ce1a42116">
+#### 달력 페이지는 작성한 일기들을 확인할 수 있어요.
+<img width="1000" alt="스크린샷 2024-08-06 오후 10 14 19" src="https://github.com/user-attachments/assets/e24d6816-282c-4dcb-b5e6-1a5ce1a42116">
 
 
 
@@ -106,4 +106,5 @@
 
 ## 일기 수정 페이지
 #### 일기 수정 페이지에서는 대화 종료 후 STT 데이터를 불러와 내용을 수정할 수 있어요.
-
+#### 수정된 텍스트는 빨간 강조 글씨로 쉽게 확인할 수 있어요.
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/1dadbd0c-1a84-4d5f-8d5c-67d2db669c52">
