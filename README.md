@@ -106,5 +106,5 @@ https://github.com/user-attachments/assets/0d2de56b-0ea6-45b8-ba83-8423e8442d91
 ## 일기 수정 페이지
 #### 일기 수정 페이지에서는 대화 종료 후 STT 데이터를 불러와 내용을 수정할 수 있어요.
 #### 수정된 텍스트는 빨간 강조 글씨로 쉽게 확인할 수 있어요.
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/1dadbd0c-1a84-4d5f-8d5c-67d2db669c52">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/b92cf47b-8d49-4905-b6b9-0c60ca4b13bd">
 
