@@ -42,16 +42,18 @@ public class ChatController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
         }
 
-        String userId = claims.getSubject();
 
         try {
-            chatService.sendFiletoDjangoServer(file.getFile(), userId);
+            // MultipartFile을 바이트 배열로 변환
+            byte[] fileBytes = file.getFile().getBytes();
+            chatService.sendFiletoDjangoServer(fileBytes);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
         }
 
         return ResponseEntity.ok("File uploaded successfully");
     }
+
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
             responses = {@ApiResponse(responseCode = "200", description = "성공")})
