@@ -2,6 +2,7 @@ package com.feelinsight.feelinsight.controller;
 
 import com.feelinsight.feelinsight.DTO.ChatDTO;
 import com.feelinsight.feelinsight.DTO.ChatDTO.ChatResponse;
+import com.feelinsight.feelinsight.DTO.FilleDTO;
 import com.feelinsight.feelinsight.domain.Chat;
 import com.feelinsight.feelinsight.exception.ChatNotFoundException;
 import com.feelinsight.feelinsight.exception.InvalidTokenException;
@@ -31,8 +32,7 @@ public class ChatController {
     private final DiaryService diaryService;
 
     @PostMapping("/upload-audio")
-    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization") String token,
-                                                   @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> handleFileUpload(@RequestHeader("Authorization") String token, FilleDTO.RequestFile file) {
 
         Claims claims;
 
@@ -45,7 +45,7 @@ public class ChatController {
         String userId = claims.getSubject();
 
         try {
-            chatService.sendFiletoDjangoServer(file, userId);
+            chatService.sendFiletoDjangoServer(file.getFile(), userId);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
         }
