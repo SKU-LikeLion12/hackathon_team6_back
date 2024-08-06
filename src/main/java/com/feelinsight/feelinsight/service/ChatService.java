@@ -60,28 +60,16 @@ public class ChatService {
         return chat;
     }
 
-    public void sendFiletoDjangoServer(MultipartFile file, String userId) throws IOException{
-//        long fileSize = file.getSize();
-//        System.out.println("파일 크기: " + fileSize + " 바이트");
-        WebClient webClient=WebClient.builder()
+    public void sendFiletoDjangoServer(byte[] fileBytes, String userId) throws IOException {
+        WebClient webClient = WebClient.builder()
                 .baseUrl(djangoServerUrl)
                 .build();
-        ByteArrayResource byteArrayResource = new ByteArrayResource(file.getBytes()) {
-            @Override
-            public String getFilename() {
-                return file.getOriginalFilename();
-            }
-        };
 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", byteArrayResource);
-        body.add("userId", userId);
-
-
-        String response= webClient.post()
+        // POST 요청 본문에 바이트 배열을 설정
+        String response = webClient.post()
                 .uri("/transcribe/")
-                .contentType(MediaType.MULTIPART_FORM_DATA)
-                .bodyValue(body)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM) // 바이트 스트림 전송을 위한 MIME 타입
+                .bodyValue(fileBytes)
                 .retrieve()
                 .onStatus(status -> status.is4xxClientError() || status.is5xxServerError(), clientResponse -> clientResponse.bodyToMono(String.class)
                         .flatMap(errorMessage -> {
@@ -98,8 +86,9 @@ public class ChatService {
 
         Chat chat = new Chat(user, processedData.getMessage());
         chatRepository.saveNewChat(chat);
-
     }
+
+
     @Getter @Setter
     private static class ProcessedData{
         private String userId;

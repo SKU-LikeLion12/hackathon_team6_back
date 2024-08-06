@@ -44,13 +44,16 @@ public class ChatController {
         String userId = claims.getSubject();
 
         try {
-            chatService.sendFiletoDjangoServer(file, userId);
+            // MultipartFile을 바이트 배열로 변환
+            byte[] fileBytes = file.getBytes();
+            chatService.sendFiletoDjangoServer(fileBytes, userId);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file to Django server.");
         }
 
         return ResponseEntity.ok("File uploaded successfully");
     }
+
 
     @Operation(summary = "대화,상황,감정 저장", description = "GPT를 통해 분석된 내용을 가져와서 저장",
             responses = {@ApiResponse(responseCode = "200", description = "성공")})
